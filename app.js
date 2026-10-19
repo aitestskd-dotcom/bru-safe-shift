@@ -15,9 +15,12 @@ var API='PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE',KEY='CHANGE_ME_SUBMIT_KEY';
 var CONS={
 en:'I agree that my name or ID may be saved with my result so my supervisor can arrange training support. Results are used for training and safety learning, not for discipline. Leave this unticked to play anonymously.',
 hi:'मैं सहमत हूँ कि मेरा नाम या आईडी मेरे नतीजे के साथ सेव हो ताकि सुपरवाइज़र ट्रेनिंग में मदद कर सके। नतीजे सिर्फ़ ट्रेनिंग और सुरक्षा सीख के लिए हैं, अनुशासनात्मक कार्रवाई के लिए नहीं। टिक न करें तो आप गुमनाम खेल सकते हैं।',
-ta:'என் முடிவுடன் என் பெயர் அல்லது எண் சேமிக்கப்படுவதற்கு நான் சம்மதிக்கிறேன்; இதனால் மேற்பார்வையாளர் பயிற்சி உதவி ஏற்பாடு செய்ய முடியும். முடிவுகள் பயிற்சிக்கும் பாதுகாப்புக் கற்றலுக்கும் மட்டுமே, ஒழுங்கு நடவடிக்கைக்கு அல்ல. டிக் செய்யாவிட்டால் பெயர் குறிப்பிடாமல் விளையாடலாம்.'};
+ta:'என் முடிவுடன் என் பெயர் அல்லது எண் சேமிக்கப்படுவதற்கு நான் சம்மதிக்கிறேன்; இதனால் மேற்பார்வையாளர் பயிற்சி உதவி ஏற்பாடு செய்ய முடியும். முடிவுகள் பயிற்சிக்கும் பாதுகாப்புக் கற்றலுக்கும் மட்டுமே, ஒழுங்கு நடவடிக்கைக்கு அல்ல. டிக் செய்யாவிட்டால் பெயர் குறிப்பிடாமல் விளையாடலாம்.',
+or:'ମୋ ନାମ କିମ୍ବା ଆଇଡି ମୋ ଫଳାଫଳ ସହିତ ସଂରକ୍ଷିତ ହୋଇପାରେ, ଯାହା ଦ୍ୱାରା ମୋ ସୁପରଭାଇଜର ପ୍ରଶିକ୍ଷଣ ସହାୟତା ଆୟୋଜନ କରିପାରିବେ। ଫଳାଫଳ କେବଳ ପ୍ରଶିକ୍ଷଣ ଏବଂ ସୁରକ୍ଷା ଶିକ୍ଷା ପାଇଁ, ଶାସନ ପାଇଁ ନୁହେଁ। ଟିକ୍ ନକରିଲେ ଆପଣ ଗୁମନାମ ଭାବରେ ଖେଳିପାରିବେ।',
+ar:'أوافق على حفظ اسمي أو رقمي مع نتيجتي حتى يتمكن المشرف من ترتيب الدعم التدريبي. تُستخدم النتائج للتدريب والتعلم من السلامة، وليس للانضباط. اتركه بدون تحديد للعب بشكل مجهول.'};
 function theme(){document.documentElement.style.setProperty('--brand',cfg.c1);document.documentElement.style.setProperty('--gold',cfg.c2);
- logo.innerHTML=Q((cfg.logo?'<img src=`'+esc(cfg.logo)+'` alt=`logo`>':'<span class=`wm`>bru</span>')+'<span class=`sub`>Shift Safe</span>')}
+ document.documentElement.dir=(L==='ar'?'rtl':'ltr');
+ logo.innerHTML=Q((cfg.logo?'<img src=`'+esc(cfg.logo)+'` alt=`logo`>':'')+'<span class=`sub`>SafeShift</span>')}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 function el(h){CUR='';main.innerHTML=Q(h);window.scrollTo(0,0)}
 function readP(){var a=document.getElementById('pn'),b=document.getElementById('ps'),c=document.getElementById('pt'),d=document.getElementById('cs');if(a){P.name=a.value;P.shift=b.value;P.site=c.value;P.consent=d&&d.checked?1:0}}
@@ -25,7 +28,7 @@ function home(){
  clearInterval(tmr);theme();prog.style.width='0';hud.textContent='';var u=UI[L];
  if(!P.shift)P.shift=cfg.shifts[0];
  var h='<div class=`card`><h1>'+u.sub+'</h1><div>'+u.tag+'</div></div>';
- h+='<div class=`card`><b>'+u.lang+'</b><div><button class=`sm'+(L==='en'?' on':'')+'` data-l=`en`>English</button><button class=`sm'+(L==='hi'?' on':'')+'` data-l=`hi`>हिन्दी</button><button class=`sm'+(L==='ta'?' on':'')+'` data-l=`ta`>தமிழ்</button></div></div>';
+ h+='<div class=`card`><b>'+u.lang+'</b><div><button class=`sm'+(L==='en'?' on':'')+'` data-l=`en`>English</button><button class=`sm'+(L==='hi'?' on':'')+'` data-l=`hi`>हिन्दी</button><button class=`sm'+(L==='ta'?' on':'')+'` data-l=`ta`>தமிழ்</button><button class=`sm'+(L==='or'?' on':'')+'` data-l=`or`>ଓଡ଼ିଆ</button><button class=`sm'+(L==='ar'?' on':'')+'` data-l=`ar`>العربية</button></div></div>';
  h+='<div class=`card`><b>'+u.ind+'</b>';
  ['CB','LG','AU','MX'].forEach(function(k){var ic={CB:'🏭',LG:'🚜',AU:'🤖',MX:'🔀'}[k];h+='<button class=`chip'+(IND===k?' on':'')+'` data-i=`'+k+'`>'+ic+' '+u.I[k]+'</button>'});
  h+='</div><div class=`card`><input id=`pn` placeholder=`'+esc(u.name)+'` value=`'+esc(P.name)+'`><select id=`ps`>';
@@ -57,10 +60,10 @@ function start(){
  idx=0;unsafe=0;tr={};stc={RU:0,FR:0,FA:0,CO:0};miss=[];nextQ()}
 function nextQ(){
  if(idx>=list.length)return result();
- var s=list[idx],u=UI[L],t=s.t[L];locked=false;
+ var s=list[idx],u=UI[L],t=s.t[L]||s.t.en;locked=false;
  prog.style.width=(idx/list.length*100)+'%';hud.textContent=(idx+1)+'/'+list.length;
  var ord=shuffle([0,1,2]);
- var h='<div class=`scene`>'+s.e+'</div><span class=`tag`>'+STN[L][s.st]+'</span><span class=`tag b`>'+CEN[L][s.ce]+'</span><h2>'+t[0]+'</h2>';
+ var h='<div class=`scene`>'+s.e+'</div><span class=`tag`>'+(STN[L]||STN.en)[s.st]+'</span><span class=`tag b`>'+(CEN[L]||CEN.en)[s.ce]+'</span><h2>'+t[0]+'</h2>';
  if(s.tm)h+='<div class=`timer`><i id=`tb`></i></div><small>'+u.quick+'</small>';
  ord.forEach(function(o,n){h+='<button class=`opt` data-n=`'+n+'`><span class=`ic`>'+s.ic[o]+'</span><span>'+t[o+1]+'</span></button>'});
  h+='<div id=`fb`></div>';el(h);
@@ -70,7 +73,7 @@ function nextQ(){
  if(s.tm){var st=Date.now();tmr=setInterval(function(){var p=Math.max(0,1-(Date.now()-st)/10000),tb=document.getElementById('tb');if(tb)tb.style.width=(p*100)+'%';if(p<=0){clearInterval(tmr);answer(s,ord,-1,b)}},100)}
 }
 function answer(s,ord,k,b){
- if(locked)return;locked=true;clearInterval(tmr);var u=UI[L],pts=0,msg=u.tu+' ',t=s.t[L];
+ if(locked)return;locked=true;clearInterval(tmr);var u=UI[L],pts=0,msg=u.tu+' ',t=s.t[L]||s.t.en;
  if(k>=0){pts=s.s[ord[k]];msg=''}
  msg+=t[4];
  if(!tr[s.tr])tr[s.tr]=[0,0];tr[s.tr][0]+=pts;tr[s.tr][1]+=2;
@@ -90,12 +93,12 @@ function result(){
  var h='<div class=`scene`>'+['🏅','👍','📚','⚠️'][lv]+'</div><h1>'+u.lv[lv]+'</h1><div class=`card`><b>'+u.score+': '+p+'%</b><br><small>'+u.uns+': '+unsafe+' / '+list.length+'</small></div>';
  h+='<div class=`card`><b>'+u.prof+'</b>';
  TR.forEach(function(k){if(!tr[k])return;var q=pc(tr[k]);if(q<lp){lp=q;low=k}
-  h+='<div class=`trait`><div class=`l`><span>'+TN[L][k]+'</span><span>'+q+'%</span></div><div class=`t`><i style=`width:'+q+'%`></i></div></div>'});
+  h+='<div class=`trait`><div class=`l`><span>'+(TN[L]||TN.en)[k]+'</span><span>'+q+'%</span></div><div class=`t`><i style=`width:'+q+'%`></i></div></div>'});
  h+='</div>';
  h+='<div class=`card`><b>'+u.sst+'</b>';
- ['RU','FR','FA','CO'].forEach(function(k){h+='<div class=`trait`><div class=`l`><span>'+STN[L][k]+'</span><span>'+stc[k]+'</span></div></div>'});
+ ['RU','FR','FA','CO'].forEach(function(k){h+='<div class=`trait`><div class=`l`><span>'+(STN[L]||STN.en)[k]+'</span><span>'+stc[k]+'</span></div></div>'});
  h+='</div>';
- if(low)h+='<div class=`card`><b>'+u.foc+':</b> '+TN[L][low]+'<br><small>'+TIP[L][low]+'</small></div>';
+ if(low)h+='<div class=`card`><b>'+u.foc+':</b> '+(TN[L]||TN.en)[low]+'<br><small>'+(TIP[L]||TIP.en)[low]+'</small></div>';
  if(p>=45)h+='<div class=`card`><b>'+u.rew+'</b><br><small>'+u.rewt+'</small><div class=`code`>'+code()+'</div></div>';
  else h+='<div class=`card`>'+u.norew+'</div>';
  h+='<button class=`big` id=`ag`>'+u.again+'</button><button class=`big alt` id=`hm`>'+u.home+'</button>';
@@ -159,11 +162,11 @@ function dash(S){
  h+='<div class=`kpi`><div><b>'+S.length+'</b>plays</div><div><b>'+avg(S.map(function(x){return x.pct}))+'%</b>avg score</div><div><b>'+S.filter(function(x){return x.pct<45}).length+'</b>high risk</div></div><br>';
  var T={};S.forEach(function(x){for(var k in x.tr){if(!T[k])T[k]=[0,0];T[k][0]+=x.tr[k][0];T[k][1]+=x.tr[k][1]}});
  h+='<div class=`card`><b>Trait scores</b>';
- TR.forEach(function(k){var q=pc(T[k]);h+='<div class=`trait`><div class=`l`><span>'+TN.en[k]+'</span><span>'+(T[k]?q+'%':'-')+'</span></div><div class=`t`><i style=`width:'+q+'%`></i></div></div>'});
+ TR.forEach(function(k){var q=pc(T[k]);h+='<div class=`trait`><div class=`l`><span>'+(TN.en[k])+'</span><span>'+(T[k]?q+'%':'-')+'</span></div><div class=`t`><i style=`width:'+q+'%`></i></div></div>'});
  h+='</div>';
  var St={RU:0,FR:0,FA:0,CO:0};S.forEach(function(x){for(var k in x.st)St[k]+=x.st[k]});
  h+='<div class=`card`><b>SafeStart states behind unsafe choices</b><table>';
- for(var k in St)h+='<tr><td>'+STN.en[k]+'</td><td>'+St[k]+'</td></tr>';
+ for(var k in St)h+='<tr><td>'+(STN.en[k])+'</td><td>'+St[k]+'</td></tr>';
  h+='</table></div>';
  function grp(key,lab){var g={};S.forEach(function(x){var v=x[key]||'-';(g[v]=g[v]||[]).push(x.pct)});var r='<div class=`card`><b>'+lab+'</b><table><tr><th></th><th>Plays</th><th>Avg</th></tr>';for(var v in g){var ok=g[v].length>=5;r+='<tr><td>'+esc(key==='ind'?(UI.en.I[v]||v):v)+'</td><td>'+g[v].length+'</td><td>'+(ok?avg(g[v])+'%':'hidden (&lt;5)')+'</td></tr>'}return r+'</table></div>'}
  h+=grp('shift','By shift')+grp('ind','By area')+grp('site','By site');
