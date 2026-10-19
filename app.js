@@ -17,8 +17,8 @@ en:'I agree that my name or ID may be saved with my result so my supervisor can 
 hi:'मैं सहमत हूँ कि मेरा नाम या आईडी मेरे नतीजे के साथ सेव हो ताकि सुपरवाइज़र ट्रेनिंग में मदद कर सके। नतीजे सिर्फ़ ट्रेनिंग और सुरक्षा सीख के लिए हैं, अनुशासनात्मक कार्रवाई के लिए नहीं। टिक न करें तो आप गुमनाम खेल सकते हैं।',
 ta:'என் முடிவுடன் என் பெயர் அல்லது எண் சேமிக்கப்படுவதற்கு நான் சம்மதிக்கிறேன்; இதனால் மேற்பார்வையாளர் பயிற்சி உதவி ஏற்பாடு செய்ய முடியும். முடிவுகள் பயிற்சிக்கும் பாதுகாப்புக் கற்றலுக்கும் மட்டுமே, ஒழுங்கு நடவடிக்கைக்கு அல்ல. டிக் செய்யாவிட்டால் பெயர் குறிப்பிடாமல் விளையாடலாம்.'};
 function theme(){document.documentElement.style.setProperty('--brand',cfg.c1);document.documentElement.style.setProperty('--gold',cfg.c2);
- logo.innerHTML=Q((cfg.logo?'<img src=`'+esc(cfg.logo)+'` alt=`logo`>':'<span class=`wm`>bru</span>')+'<span class=`sub`>Safe Shift</span>')}
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+ logo.innerHTML=Q((cfg.logo?'<img src=`'+esc(cfg.logo)+'` alt=`logo`>':'<span class=`wm`>bru</span>')+'<span class=`sub`>Shift Safe</span>')}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*i),t=a[i];a[i]=a[j];a[j]=t}return a}
 function el(h){CUR='';main.innerHTML=Q(h);window.scrollTo(0,0)}
 function readP(){var a=document.getElementById('pn'),b=document.getElementById('ps'),c=document.getElementById('pt'),d=document.getElementById('cs');if(a){P.name=a.value;P.shift=b.value;P.site=c.value;P.consent=d&&d.checked?1:0}}
 function home(){
