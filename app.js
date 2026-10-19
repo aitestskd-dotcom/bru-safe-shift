@@ -18,7 +18,7 @@ hi:'मैं सहमत हूँ कि मेरा नाम या आई
 ta:'என் முடிவுடன் என் பெயர் அல்லது எண் சேமிக்கப்படுவதற்கு நான் சம்மதிக்கிறேன்; இதனால் மேற்பார்வையாளர் பயிற்சி உதவி ஏற்பாடு செய்ய முடியும். முடிவுகள் பயிற்சிக்கும் பாதுகாப்புக் கற்றலுக்கும் மட்டுமே, ஒழுங்கு நடவடிக்கைக்கு அல்ல. டிக் செய்யாவிட்டால் பெயர் குறிப்பிடாமல் விளையாடலாம்.'};
 function theme(){document.documentElement.style.setProperty('--brand',cfg.c1);document.documentElement.style.setProperty('--gold',cfg.c2);
  logo.innerHTML=Q((cfg.logo?'<img src=`'+esc(cfg.logo)+'` alt=`logo`>':'<span class=`wm`>bru</span>')+'<span class=`sub`>Shift Safe</span>')}
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*i),t=a[i];a[i]=a[j];a[j]=t}return a}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 function el(h){CUR='';main.innerHTML=Q(h);window.scrollTo(0,0)}
 function readP(){var a=document.getElementById('pn'),b=document.getElementById('ps'),c=document.getElementById('pt'),d=document.getElementById('cs');if(a){P.name=a.value;P.shift=b.value;P.site=c.value;P.consent=d&&d.checked?1:0}}
 function home(){
@@ -41,9 +41,19 @@ function home(){
  document.getElementById('go').onclick=function(){readP();start()};
  document.getElementById('sp').onclick=function(){readP();pinScreen()};
 }
+function pool(){
+ if(IND==='MX'){var ids=[];['CB','LG','AU'].forEach(function(k){SC.filter(function(s){return s.i===k}).forEach(function(s){ids.push(s.id)})});return ids}
+ return SC.filter(function(s){return s.i===IND}).map(function(s){return s.id})}
+function rotation(){
+ var key='bss_rot_'+IND,poolIds=pool();
+ var q=mem[key];if(!q||!q.length)q=[];
+ q=q.filter(function(id){return poolIds.indexOf(id)>=0});
+ var remaining=poolIds.filter(function(id){return q.indexOf(id)<0});
+ if(q.length<6){q=q.concat(shuffle(remaining));}
+ var take=q.slice(0,6);mem[key]=q.slice(6);sv();
+ return take.map(function(id){return SC.filter(function(s){return s.id===id})[0]}).filter(Boolean)}
 function start(){
- if(IND==='MX'){list=[];['CB','LG','AU'].forEach(function(k){list=list.concat(shuffle(SC.filter(function(s){return s.i===k})).slice(0,3))});list=shuffle(list)}
- else list=shuffle(SC.filter(function(s){return s.i===IND}));
+ list=shuffle(rotation());
  idx=0;unsafe=0;tr={};stc={RU:0,FR:0,FA:0,CO:0};miss=[];nextQ()}
 function nextQ(){
  if(idx>=list.length)return result();
